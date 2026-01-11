@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Verify</title>
+    <link rel="stylesheet" href="../css/main.css"> <!-- Adjusted relative path -->
+</head>
+
+<body>
+    <div id="welcomeName">Guest</div>
+    <div id="appliedJobsList"></div>
+
+    <!-- Button to trigger showTab -->
+    <a href="#" onclick="showTab('applied'); return false;" id="testBtn">View Status</a>
+
+    <div id="statApplied"></div>
+    <div id="statReviewed"></div>
+    <div id="statInterview"></div>
+
+    <script>
+        // Mock API
+        window.fetch = async (url) => {
+            console.log('Fetching:', url);
+            if (url === '/api/auth/me') {
+                return {
+                    json: async () => ({
+                        success: true,
+                        data: { name: 'Test User', role: 'seeker', _id: '123' }
+                    })
+                };
+            }
+            if (url === '/api/jobs/applied' || url === '/api/applications/my-applications') {
+                return {
+                    ok: true,
+                    json: async () => ({
+                        success: true,
+                        data: [
+                            {
+                                status: 'Reviewed',
+                                appliedAt: new Date().toISOString(),
+                                job: {
+                                    _id: 'j1',
+                                    title: 'Mock Job',
+                                    employer: { companyName: 'Mock Corp' }
+                                }
+                            }
+                        ]
+                    })
+                };
+            }
+            return { json: async () => ({ success: false }) };
+        };
+    </script>
+    <script src="temp_dashboard.js"></script>
+
+    <footer style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next generation job portal for professionals and companies.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post a Job</a></li>
+                        <li><a href="/certificate-management" style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart" style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

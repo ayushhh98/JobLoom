@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | Hire</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/jobs">Find Jobs</a></li>
+                    <li><a href="#" id="backBtn">Back to Jobs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 100px; padding-bottom: 2rem;">
+        <div id="loading" style="text-align: center;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+            <p style="margin-top: 1rem; color: var(--gray);">Loading job details...</p>
+        </div>
+
+        <div id="jobContent" style="display: none;">
+            <!-- Header Card -->
+            <div class="glass-card" style="margin-bottom: 2rem; padding: 2.5rem;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div style="display: flex; gap: 1.5rem; align-items: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: var(--light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--gray);">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h1 id="jobTitle" style="font-size: 2rem; margin-bottom: 0.25rem;"></h1>
+                            <p id="companyName" style="font-size: 1.1rem; color: var(--primary); font-weight: 500;"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="applyBtn" class="btn btn-primary"
+                            style="padding: 1rem 2.5rem; font-size: 1.1rem;">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2.5fr 1fr; gap: 2rem;">
+                <!-- Left: Description -->
+                <div class="glass-card">
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                            Description</h3>
+                        <div id="jobDesc" style="white-space: pre-line; color: #475569; line-height: 1.7;"></div>
+                    </div>
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">Key
+                            Responsibilities</h3>
+                        <div id="jobResp" style="white-space: pre-line; color: #475569; line-height: 1.7;"></div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                            Qualifications</h3>
+                        <div id="jobQual" style="white-space: pre-line; color: #475569; line-height: 1.7;"></div>
+                    </div>
+                </div>
+
+                <!-- Right: Snapshot -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="glass-card" style="background: white;">
+                        <h4 style="margin-bottom: 1.5rem;">Job Snapshot</h4>
+                        <ul style="display: flex; flex-direction: column; gap: 1.25rem;">
+                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <i class="fas fa-briefcase" style="color: var(--primary); margin-top: 3px;"></i>
+                                <div>
+                                    <span style="display: block; font-size: 0.85rem; color: var(--gray);">Job
+                                        Type</span>
+                                    <strong id="jobType" style="color: var(--dark);"></strong>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <i class="fas fa-money-bill-wave" style="color: var(--secondary); margin-top: 3px;"></i>
+                                <div>
+                                    <span style="display: block; font-size: 0.85rem; color: var(--gray);">Salary
+                                        Range</span>
+                                    <strong id="salary" style="color: var(--dark);"></strong>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <i class="fas fa-map-marker-alt" style="color: #ef4444; margin-top: 3px;"></i>
+                                <div>
+                                    <span
+                                        style="display: block; font-size: 0.85rem; color: var(--gray);">Location</span>
+                                    <strong id="location" style="color: var(--dark);"></strong>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card" style="background: var(--gradient-glass); color: white; border: none;">
+                        <h4 style="color: white; margin-bottom: 0.5rem;">Share this job</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem;">Know someone who would be a
+                            great fit?</p>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-outline"
+                                style="border-color: rgba(255,255,255,0.3); color: white; padding: 0.5rem 1rem;"><i
+                                    class="fas fa-link"></i> Copy Link</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/job-details.js"></script>
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

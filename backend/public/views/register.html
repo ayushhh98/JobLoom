@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | JobLoom</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="auth-page-bg">
+        <!-- Back to Home Button -->
+        <a href="/"
+            style="position: absolute; top: 2rem; left: 2rem; display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray); font-weight: 500; z-index: 20;">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="/images/logo.svg" alt="JobLoom" class="auth-logo">
+                <h2 class="auth-title">Create Account</h2>
+                <p class="auth-subtitle">Join the future of hiring</p>
+            </div>
+
+            <form id="registerForm">
+                <div id="alertError"
+                    style="display:none; color: #ef4444; background: #fee2e2; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem; text-align: center; font-size: 0.9rem;">
+                </div>
+
+                <div class="input-group">
+                    <i class="far fa-user input-icon"></i>
+                    <input type="text" id="name" class="form-control form-control-icon" placeholder="Full Name"
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <i class="far fa-envelope input-icon"></i>
+                    <input type="email" id="email" class="form-control form-control-icon" placeholder="Email Address"
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" class="form-control form-control-icon"
+                        placeholder="Create Password" required minlength="6">
+                </div>
+
+                <!-- Role Selection -->
+                <div class="form-group"
+                    style="background: var(--color-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--color-border);">
+                    <label style="margin-bottom: 0.8rem; display: block; font-size: 0.9rem; color: var(--color-gray);">I
+                        am a:</label>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <label
+                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; font-size: 0.95rem;">
+                            <input type="radio" name="role" value="seeker" checked onchange="toggleCompanyField()"
+                                style="accent-color: var(--color-primary);">
+                            Job Seeker
+                        </label>
+                        <label
+                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; font-size: 0.95rem;">
+                            <input type="radio" name="role" value="employer" onchange="toggleCompanyField()"
+                                style="accent-color: var(--color-primary);">
+                            Employer
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group" id="companyField" style="display: none;">
+                    <i class="far fa-building input-icon"></i>
+                    <input type="text" id="companyName" class="form-control form-control-icon"
+                        placeholder="Company Name">
+                </div>
+
+                <button type="submit" class="auth-btn">Get Started</button>
+            </form>
+
+            <div class="auth-footer">
+                <p style="color: var(--color-gray); font-size: 0.95rem;">
+                    Already have an account? <a href="/login" class="auth-link">Login</a>
+                </p>
+                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-gray);">
+                    Hiring? <a href="/recruiter-register"
+                        style="color: var(--color-primary); font-weight: 600;">Register as Recruiter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTP Verification Modal -->
+    <div id="otpModal">
+        <div class="otp-card glass-card">
+            <div class="otp-icon-wrapper">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 style="margin-bottom: 0.5rem; color: var(--color-dark);">Verify Email</h3>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem; font-size: 0.95rem;">Enter the 6-digit code sent
+                to <span id="otpEmailDisplay" style="font-weight: 600;">your email</span></p>
+
+            <form id="otpForm">
+                <input type="hidden" id="otpEmail">
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem;">
+                    <input type="text" id="otpInput" maxlength="6" class="form-control" placeholder="123456" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full" style="width: 100%;">Verify & Continue</button>
+            </form>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-gray);">Didn't receive code? <a href="#"
+                    style="color: var(--color-primary); font-weight: 600;">Resend</a></p>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script>
+        // Check for role query param content
+        const urlParams = new URLSearchParams(window.location.search);
+        const roleParam = urlParams.get('role');
+        if (roleParam === 'employer') {
+            document.querySelector('input[name="role"][value="employer"]').checked = true;
+            toggleCompanyField();
+        }
+
+        function toggleCompanyField() {
+            const role = document.querySelector('input[name="role"]:checked').value;
+            const companyField = document.getElementById('companyField');
+            if (role === 'employer') {
+                companyField.style.display = 'block';
+                document.getElementById('companyName').required = true;
+            } else {
+                companyField.style.display = 'none';
+                document.getElementById('companyName').required = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

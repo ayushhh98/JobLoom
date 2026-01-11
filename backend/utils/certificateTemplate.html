@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7fafc;
+        }
+
+        .certificate-container {
+            width: 800px;
+            height: 600px;
+            padding: 20px;
+            background-color: white;
+            border: 10px solid #1e3a8a;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .border-inner {
+            border: 2px solid #e2e8f0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .header {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .sub-header {
+            font-size: 24px;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+
+        .student-name {
+            font-size: 40px;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 20px 0;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0 40px 10px;
+            display: inline-block;
+        }
+
+        .content-text {
+            font-size: 18px;
+            color: #475569;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .course-name {
+            font-weight: bold;
+            font-size: 22px;
+            color: #1e3a8a;
+        }
+
+        .footer {
+            margin-top: 50px;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .signature-line {
+            border-top: 2px solid #94a3b8;
+            width: 200px;
+            text-align: center;
+            padding-top: 10px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        .cert-id {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+            font-family: sans-serif;
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate-container">
+        <div class="border-inner">
+            <!-- Watermark -->
+            <div
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; pointer-events: none; z-index: 0;">
+                <img src="https://via.placeholder.com/400x400?text=JobLoom+Verified"
+                    style="width: 500px; height: auto;" />
+            </div>
+
+            <div style="position: relative; z-index: 1;">
+                <!-- <img src="{{logoUrl}}" class="logo" alt="Logo" /> -->
+                <div class="header">Certificate of Completion</div>
+                <div class="sub-header" style="margin-bottom: 10px;">This is to certify that</div>
+                <div
+                    style="font-size: 14px; color: #64748b; margin-bottom: 30px; font-family: sans-serif; letter-spacing: 1px;">
+                    Certificate ID: <span style="color: #1e3a8a; font-weight: bold;">{{certificateId}}</span>
+                </div>
+
+                <div class="student-name">{{name}}</div>
+
+                <p class="content-text">has successfully completed the course</p>
+                <div class="course-name">{{course}}</div>
+
+                <p class="content-text">
+                    Demonstrating valid understanding and mastery of the subject matter.<br>
+                    Issued on {{date}}
+                </p>
+
+                <div class="footer">
+                    <div class="signature-line">
+                        <!-- <img src="{{signatureUrl}}" style="height: 40px; display: block; margin: 0 auto;" /> -->
+                        Instructor Signature
+                    </div>
+                    <div class="signature-line">
+                        Director Signature
+                    </div>
+                </div>
+
+                <!-- <div class="cert-id">ID: {{certificateId}}</div> -->
+            </div> <!-- End relative z-index wrapper -->
+        </div>
+    </div>
+</body>
+
+</html>
+```

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JobLoom - Professional Certificate Management Dashboard">
+    <meta name="theme-color" content="#4f46e5">
+    <title>JobLoom - Certificate Management</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <!-- <li><a href="/jobs">Find Jobs</a></li> -->
+                    <li><a href="/certificate-management" class="active">Certificates</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header"
+                style="text-align: center; margin-bottom: 4rem; padding-top: 2rem; margin-top: 40px ;">
+                <h2 class="page-title" style="font-size: 3rem; margin-bottom: 1rem;">Certificate Management</h2>
+                <p class="page-subtitle" style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; opacity: 0.8;">
+                    Issue, manage, and verify professional credentials with our state-of-the-art verification ecosystem.
+                </p>
+            </div>
+
+            <!-- New: Certificate Search/Verification Section (Prominent UI/UX Feature) -->
+            <div class="search-card-premium mb-5 reveal">
+                <h3 class="card-title"><i class="fas fa-search"></i> Certificate Verification Portal</h3>
+                <p class="card-subtitle" style="opacity: 0.9; margin-bottom: 2rem;">Verify the authenticity of any
+                    issued certificate by entering its unique ID.</p>
+                <form id="verificationForm">
+                    <div class="search-input-group-premium">
+                        <input type="text" id="certificateId" class="search-input-premium"
+                            placeholder="Enter Unique Certificate ID (e.g., JL-2025-12345)" required>
+                        <button type="submit" class="btn btn-glass">
+                            <i class="fas fa-check-circle"></i> Verify
+                        </button>
+                    </div>
+                </form>
+                <div id="searchResult" class="glass-card" style="display: none; margin-top: 2rem; padding: 2rem;">
+                    <!-- Verification results will be displayed here -->
+                </div>
+            </div>
+
+            <!-- New: How to Generate & Verify Certificates Instructions -->
+            <div class="glass-card mb-5 reveal">
+                <h4 class="card-title mb-4"><i class="fas fa-info-circle"></i> How to Generate & Verify Certificates
+                </h4>
+                <div class="grid-3" style="gap: 2rem;">
+                    <div class="instruction-step">
+                        <div class="step-badge"
+                            style="background: var(--color-primary-light); color: var(--color-primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">
+                            1</div>
+                        <h5 style="margin-bottom: 0.5rem; color: var(--color-dark);">Download Template</h5>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-dark); line-height: 1.5;">Start by
+                            downloading our standardized Excel template. Fill in student names and course details
+                            exactly as required.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-badge"
+                            style="background: var(--color-info-light); color: var(--color-info); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">
+                            2</div>
+                        <h5 style="margin-bottom: 0.5rem; color: var(--color-dark);">Upload & Process</h5>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-dark); line-height: 1.5;">Upload your Excel
+                            file in the Admin section below. Our system will validate the data and prepare records for
+                            generation.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-badge"
+                            style="background: var(--color-success-light); color: var(--color-success); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">
+                            3</div>
+                        <h5 style="margin-bottom: 0.5rem; color: var(--color-dark);">Generate & Share</h5>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-dark); line-height: 1.5;">Click "Generate
+                            All Pending" to issue secure IDs. Students can then verify their certificates using the
+                            portal above.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Management Section -->
+            <div class="glass-card mb-5 reveal">
+                <div class="card-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <i class="fas fa-user-shield" style="font-size: 1.5rem; color: var(--color-primary);"></i>
+                        <h4 class="card-title" style="margin: 0;">Bulk Upload & Generation Panel</h4>
+                    </div>
+                    <div class="card-actions">
+                        <a href="/uploads/templates/student-template.xlsx" class="btn btn-outline btn-sm" download>
+                            <i class="fas fa-download"></i> Excel Template
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body-grid">
+                    <!-- Upload Form & Stats -->
+                    <div>
+                        <h5 class="section-title">Upload Student Data</h5>
+                        <form id="uploadForm" class="form">
+                            <div class="form-group">
+                                <label for="certFile">Select Excel File</label>
+                                <div class="file-upload-area-premium"
+                                    onclick="document.getElementById('certFile').click()">
+                                    <i class="fas fa-cloud-upload-alt upload-icon"
+                                        style="font-size: 3rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
+                                    <p class="upload-text" id="uploadText"
+                                        style="font-weight: 600; color: var(--color-dark-muted);">Click to upload .xlsx
+                                        file</p>
+                                    <p style="font-size: 0.85rem; color: var(--color-gray); margin-top: 0.5rem;">Maximum
+                                        file size: 5MB</p>
+                                    <input type="file" id="certFile" accept=".xlsx, .xls" style="display: none;"
+                                        required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full" style="padding: 1rem;">
+                                <i class="fas fa-upload"></i> Upload Data
+                            </button>
+                        </form>
+
+                        <div class="stats-section mt-5">
+                            <h5 class="section-title mb-4">Dashboard Overview</h5>
+                            <div class="stats-grid-professional">
+                                <div class="stat-card-premium">
+                                    <div class="stat-icon-premium"
+                                        style="background: var(--color-primary-light); color: var(--color-primary);">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="stat-content-premium">
+                                        <h3 class="stat-value-premium" id="totalStudents">0</h3>
+                                        <p class="stat-label-premium">Total Uploaded</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card-premium">
+                                    <div class="stat-icon-premium"
+                                        style="background: var(--color-success-light); color: var(--color-success);">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="stat-content-premium">
+                                        <h3 class="stat-value-premium" id="generatedCount">0</h3>
+                                        <p class="stat-label-premium">Generated</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card-premium">
+                                    <div class="stat-icon-premium"
+                                        style="background: var(--color-warning-light); color: var(--color-warning);">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="stat-content-premium">
+                                        <h3 class="stat-value-premium" id="pendingCount">0</h3>
+                                        <p class="stat-label-premium">Pending</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div>
+                        <div class="table-actions-header"
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h5 class="section-title-no-margin"
+                                style="margin: 0; color: var(--color-dark); font-weight: 700;">Student Records</h5>
+                            <button class="btn btn-success btn-sm" onclick="bulkGenerate()">
+                                <i class="fas fa-magic"></i> Generate All Pending
+                            </button>
+                        </div>
+
+                        <div class="table-container-premium">
+                            <div class="table-responsive">
+                                <table class="data-table-premium">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>Course</th>
+                                            <th>Status</th>
+                                            <th>Cert ID</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentsBody">
+                                        <tr>
+                                            <td colspan="5" class="table-empty-state">
+                                                No students uploaded yet.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+
+
+    <script>
+        // --- Helper Functions ---
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => { notification.remove(); }, 4000);
+        }
+
+        // --- Admin Management Logic ---
+
+        // File Input Display Update
+        const fileInput = document.getElementById('certFile');
+        const uploadText = document.getElementById('uploadText');
+        if (fileInput && uploadText) {
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    uploadText.innerHTML = `<i class="fas fa-file-excel"></i> ${e.target.files[0].name}`;
+                    uploadText.style.color = 'var(--color-dark)';
+                } else {
+                    uploadText.innerHTML = 'Click to upload .xlsx file';
+                    uploadText.style.color = 'var(--color-gray)';
+                }
+            });
+        }
+
+        // Upload Form Submission
+        const uploadForm = document.getElementById('uploadForm');
+        if (uploadForm) {
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+
+                try {
+                    showNotification('Uploading...', 'info');
+                    // Placeholder for API call
+                    // const res = await fetch('/api/cert/upload', { method: 'POST', body: formData });
+                    // const data = await res.json();
+
+                    // Mock API Response for Demo
+                    const data = {
+                        success: true,
+                        count: 5,
+                        errors: null,
+                        data: [
+                            { _id: '1', name: 'Alice Johnson', course: 'Web Dev', status: 'Pending', certificateId: null },
+                            { _id: '2', name: 'Bob Smith', course: 'Data Science', status: 'Generated', certificateId: 'JL-2025-001' },
+                            { _id: '3', name: 'Charlie Brown', course: 'Web Dev', status: 'Pending', certificateId: null },
+                            { _id: '4', name: 'Diana Prince', course: 'UX Design', status: 'Generated', certificateId: 'JL-2025-002' },
+                            { _id: '5', name: 'Eve Adams', course: 'UX Design', status: 'Pending', certificateId: null },
+                        ]
+                    };
+
+                    if (data.success) {
+                        showNotification(`Successfully uploaded ${data.count} students!`, 'success');
+                        uploadForm.reset();
+                        if (uploadText) {
+                            uploadText.innerHTML = 'Click to upload .xlsx file';
+                            uploadText.style.color = 'var(--color-gray)';
+                        }
+                        loadStudents(data.data); // Load with mock data
+                    } else {
+                        showNotification(data.error || 'Upload failed', 'error');
+                    }
+                } catch (err) {
+                    showNotification(err.message, 'error');
+                }
+            });
+        }
+
+        // Load Students (Mocked)
+        let studentRecords = []; // Global store for mock data
+
+        async function loadStudents(mockData = null) {
+            const tbody = document.getElementById('studentsBody');
+            if (!tbody) return;
+
+            // In a real app, this would fetch from /api/cert/students
+            if (mockData) {
+                studentRecords = mockData;
+            } else if (studentRecords.length === 0) {
+                // Initial load mock data if none exists
+                studentRecords = [
+                    { _id: '1', name: 'Alice Johnson', course: 'Web Dev', status: 'Pending', certificateId: null },
+                    { _id: '2', name: 'Bob Smith', course: 'Data Science', status: 'Generated', certificateId: 'JL-2025-001', pdfUrl: '#' },
+                    { _id: '3', name: 'Charlie Brown', course: 'Web Dev', status: 'Pending', certificateId: null },
+                    { _id: '4', name: 'Diana Prince', course: 'UX Design', status: 'Generated', certificateId: 'JL-2025-002', pdfUrl: '#' },
+                ];
+            }
+
+            tbody.innerHTML = '';
+
+            // Update stats
+            document.getElementById('totalStudents').innerText = studentRecords.length;
+            const generatedCount = studentRecords.filter(s => s.status === 'Generated').length;
+            document.getElementById('generatedCount').innerText = generatedCount;
+            document.getElementById('pendingCount').innerText = studentRecords.length - generatedCount;
+
+            if (studentRecords.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="table-empty-state">No students uploaded yet.</td></tr>`;
+                return;
+            }
+
+            studentRecords.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="table-cell">${student.name}</td>
+                    <td class="table-cell">${student.course}</td>
+                    <td class="table-cell">
+                        <span class="job-badge job-badge--${student.status === 'Generated' ? 'success' : 'warning'}">${student.status}</span>
+                    </td>
+                    <td class="table-cell">
+                        ${student.certificateId || '-'}
+                    </td>
+                    <td class="table-cell">
+                        <div style="display: flex; gap: 0.5rem;">
+                            ${student.status === 'Generated'
+                        ? `<a href="${student.pdfUrl}" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-download"></i></a>`
+                        : `<button onclick="generateCert('${student._id}')" class="btn btn-primary btn-sm">Generate</button>`
+                    }
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Generate Single Certificate (Mocked)
+        async function generateCert(id) {
+            showNotification('Generating certificate...', 'info');
+
+            // Mock generation process
+            const studentIndex = studentRecords.findIndex(s => s._id === id);
+            if (studentIndex !== -1) {
+                studentRecords[studentIndex].status = 'Generated';
+                studentRecords[studentIndex].certificateId = 'JL-2025-' + Math.floor(Math.random() * 1000 + 100).toString();
+                studentRecords[studentIndex].pdfUrl = '#';
+                showNotification('Certificate generated!', 'success');
+                loadStudents();
+            } else {
+                showNotification('Generation failed: Student not found.', 'error');
+            }
+        }
+
+        // Bulk Generate (Mocked)
+        async function bulkGenerate() {
+            if (!confirm('Are you sure you want to generate certificates for ALL pending students? This may take a while.')) return;
+
+            showNotification('Starting bulk generation...', 'info');
+
+            let generatedCount = 0;
+            studentRecords = studentRecords.map(s => {
+                if (s.status === 'Pending') {
+                    s.status = 'Generated';
+                    s.certificateId = 'JL-2025-' + Math.floor(Math.random() * 1000 + 100).toString();
+                    s.pdfUrl = '#';
+                    generatedCount++;
+                }
+                return s;
+            });
+
+            showNotification(`Bulk generation complete. ${generatedCount} certificates generated.`, 'success');
+            setTimeout(loadStudents, 1000);
+        }
+
+        // --- Certificate Verification Logic (New Feature) ---
+
+        const verificationForm = document.getElementById('verificationForm');
+        const searchResultDiv = document.getElementById('searchResult');
+
+        if (verificationForm) {
+            verificationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const certId = document.getElementById('certificateId').value.trim();
+                searchResultDiv.style.display = 'none';
+                searchResultDiv.innerHTML = '';
+
+                if (!certId) {
+                    showNotification('Please enter a Certificate ID.', 'warning');
+                    return;
+                }
+
+                showNotification(`Searching for certificate ID: ${certId}...`, 'info');
+
+                // Mock API call for verification
+                const mockResults = {
+                    'JL-2025-001': { name: 'Bob Smith', course: 'Data Science', issueDate: '2025-10-01', status: 'Authentic', downloadUrl: '#' },
+                    'JL-2025-002': { name: 'Diana Prince', course: 'UX Design', issueDate: '2025-11-15', status: 'Authentic', downloadUrl: '#' },
+                };
+
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+
+                const result = mockResults[certId];
+
+                if (result) {
+                    searchResultDiv.style.display = 'block';
+                    searchResultDiv.innerHTML = `
+                        <h5 style="color: var(--color-success); margin-bottom: 1rem;"><i class="fas fa-check-circle"></i> Certificate Verified!</h5>
+                        <div class="result-item">
+                            <span class="result-label">Status:</span>
+                            <span class="result-value" style="color: var(--color-success);">${result.status}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Holder Name:</span>
+                            <span class="result-value">${result.name}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Course:</span>
+                            <span class="result-value">${result.course}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Issue Date:</span>
+                            <span class="result-value">${result.issueDate}</span>
+                        </div>
+                        <div style="margin-top: 1.5rem; text-align: center;">
+                            <a href="${result.downloadUrl}" class="btn btn-primary">
+                                <i class="fas fa-download"></i> Download Certificate
+                            </a>
+                        </div>
+                    `;
+                    showNotification('Verification successful.', 'success');
+                } else {
+                    searchResultDiv.style.display = 'block';
+                    searchResultDiv.innerHTML = `
+                        <h5 style="color: var(--color-danger); margin-bottom: 1rem;"><i class="fas fa-times-circle"></i> Verification Failed</h5>
+                        <p>The certificate ID **${certId}** could not be found in our records. Please check the ID and try again.</p>
+                    `;
+                    showNotification('Certificate not found.', 'error');
+                }
+            });
+        }
+
+        // Load students on page load
+        window.addEventListener('load', loadStudents);
+    </script>
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+STATUS: 201
+--- HEADERS ---
+{
+  "access-control-allow-origin": "*",
+  "cross-origin-opener-policy": "same-origin",
+  "cross-origin-resource-policy": "same-origin",
+  "origin-agent-cluster": "?1",
+  "referrer-policy": "no-referrer",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-dns-prefetch-control": "off",
+  "x-download-options": "noopen",
+  "x-frame-options": "SAMEORIGIN",
+  "x-permitted-cross-domain-policies": "none",
+  "x-xss-protection": "0",
+  "set-cookie": [
+    "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTI1Y2RiNDg5OThmNTY2MjJlODYyNiIsInJvbGUiOiJzZWVrZXIiLCJpYXQiOjE3NjcwMDU0MDMsImV4cCI6MTc2OTU5NzQwM30.9lsZlJ-ex3ARAXNa_m1w-L3JxaPRJOqi5BQ1Qrxpa78; Path=/; Expires=Wed, 28 Jan 2026 10:50:03 GMT; HttpOnly"
+  ],
+  "content-type": "application/json; charset=utf-8",
+  "content-length": "351",
+  "etag": "W/\"15f-ObnLFEQOMgU/N0KBc20URhtCalQ\"",
+  "date": "Mon, 29 Dec 2025 10:50:03 GMT",
+  "connection": "keep-alive",
+  "keep-alive": "timeout=5"
+}
+--- BODY ---
+{"success":true,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTI1Y2RiNDg5OThmNTY2MjJlODYyNiIsInJvbGUiOiJzZWVrZXIiLCJpYXQiOjE3NjcwMDU0MDMsImV4cCI6MTc2OTU5NzQwM30.9lsZlJ-ex3ARAXNa_m1w-L3JxaPRJOqi5BQ1Qrxpa78","user":{"id":"69525cdb48998f56622e8626","name":"Token Tester Logger","email":"tokentest_1767005403320@example.com","role":"seeker"}}
+
+SUCCESS: Token found in response body!
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTI1Y2RiNDg5OThmNTY2MjJlODYyNiIsInJvbGUiOiJzZWVrZXIiLCJpYXQiOjE3NjcwMDU0MDMsImV4cCI6MTc2OTU5NzQwM30.9lsZlJ-ex3ARAXNa_m1w-L3JxaPRJOqi5BQ1Qrxpa78
+
+Verifying token with /api/auth/me ...
+VERIFY STATUS: 200
+VERIFY BODY: {"success":true,"data":{"_id":"69525cdb48998f56622e8626","name":"Token Tester Logger","email":"tokentest_1767005403320@example.com","role":"seeker","skills":[],"createdAt":"2025-12-29T10:50:03.347Z","__v":0}}
+FINAL RESULT: JWT IMPLEMENTATION IS WORKING PERFECTLY.

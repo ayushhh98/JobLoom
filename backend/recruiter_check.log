@@ -1,0 +1,26 @@
+STATUS: 200
+--- HEADERS ---
+{
+  "access-control-allow-origin": "*",
+  "cross-origin-opener-policy": "same-origin",
+  "cross-origin-resource-policy": "same-origin",
+  "origin-agent-cluster": "?1",
+  "referrer-policy": "no-referrer",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-dns-prefetch-control": "off",
+  "x-download-options": "noopen",
+  "x-frame-options": "SAMEORIGIN",
+  "x-permitted-cross-domain-policies": "none",
+  "x-xss-protection": "0",
+  "content-type": "application/json; charset=utf-8",
+  "content-length": "118",
+  "etag": "W/\"76-8qvVYfJNmgMYTQVr0J3xcsw1uro\"",
+  "date": "Wed, 07 Jan 2026 19:42:42 GMT",
+  "connection": "keep-alive",
+  "keep-alive": "timeout=5"
+}
+--- BODY ---
+{"success":true,"message":"Registration successful. OTP sent to email.","email":"recruiter_1767814957929@example.com"}
+
+FAILURE: No token in response body

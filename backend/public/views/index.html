@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire | Premium Job Portal & Certificate System</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .timeline-section {
+            background: var(--color-white);
+            padding: 6rem 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .timeline-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            .timeline-steps::before {
+                content: '';
+                position: absolute;
+                top: 40px;
+                left: 10%;
+                right: 10%;
+                height: 2px;
+                background: var(--color-border);
+                z-index: 0;
+            }
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .step-marker {
+            width: 80px;
+            height: 80px;
+            background: var(--color-white);
+            border: 4px solid var(--color-primary);
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-base);
+        }
+
+        .timeline-step:hover .step-marker {
+            background: var(--color-primary);
+            color: var(--color-white);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .step-content h5 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-dark);
+        }
+
+        .step-content p {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            padding: 0 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="/jobs">Find Jobs</a></li>
+                    <li><a href="/recruiter-register">Employer Zone</a></li>
+                    <li><a href="/certificate-management">Verify Certificate</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register" class="btn btn-primary">Register</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero reveal">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Dream Jobs & <br> Verified Skills</h1>
+                    <p>Connect with top employers and showcase your verified credentials in one premium ecosystem. The
+                        future of hiring is here.</p>
+                    <div class="cta-group">
+                        <a href="/jobs" class="btn btn-primary">Find a Job</a>
+                        <a href="/register?role=employer" class="btn btn-outline">Post a Job</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/images/index.png" alt="JobLoom" height="550px" width="650px">
+                </div>
+            </div>
+        </section>
+
+
+        <section class="container reveal">
+            <div class="poster-banner">
+                <div class="poster-content">
+                    <div class="poster-logo-container">
+                        <img src="/images/logo.svg" alt="JobLoom Logo" class="poster-logo">
+                    </div>
+                    <h2 class="poster-title">Empowering Your Career Journey</h2>
+                    <p class="poster-tagline">Join the ecosystem where verified skills meet world-class opportunities.
+                        Your future starts here.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works (Timeline Design) -->
+        <section class="container reveal" style="margin-top: 20px;">
+            <div class="section-title" style="text-align: center; margin-bottom: 5rem;">
+                <h2 style="font-family: var(--font-display); font-size: 3rem; color: var(--color-dark);">Why Choose
+                    JobLoom?</h2>
+                <p style="font-size: 1.2rem; color: var(--color-gray);">Experience the future of professional
+                    networking.</p>
+            </div>
+            <div class="feature-board">
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-search feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Smart Job Search</h4>
+                        <p>AI-powered matching that understands your potential beyond keywords.</p>
+                    </div>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-certificate feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Instant Verification</h4>
+                        <p>Blockchain-secured credentials that give you instant credibility with employers.</p>
+                    </div>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Secure & Private</h4>
+                        <p>Enterprise-grade protection for your most valuable professional data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section reveal">
+            <div class="container">
+                <div class="section-title">
+                    <h2>How It Works</h2>
+                    <p>Your journey to a better career is just four simple steps away.</p>
+                </div>
+
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="step-marker">1</div>
+                        <div class="step-content">
+                            <h5>Create Profile</h5>
+                            <p>Build a dynamic digital presence that showcases your achievements and potential.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-marker">2</div>
+                        <div class="step-content">
+                            <h5>Search Jobs</h5>
+                            <p>Explore curated opportunities from top-tier companies across the globe.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-marker">3</div>
+                        <div class="step-content">
+                            <h5>Apply & Verify</h5>
+                            <p>Submit applications with confidence and get your skills validated in real-time.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-marker">4</div>
+                        <div class="step-content">
+                            <h5>Get Hired</h5>
+                            <p>Seal the deal with your dream employer and start your next professional chapter.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container reveal">
+            <div class="stats-grid">
+                <div class="stat-item" style="text-align: center;">
+                    <h3>1.2k+</h3>
+                    <p style="font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Active Jobs</p>
+                </div>
+                <div class="stat-item" style="text-align: center;">
+                    <h3>5k+</h3>
+                    <p style="font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Verified Talent</p>
+                </div>
+                <div class="stat-item" style="text-align: center;">
+                    <h3>800+</h3>
+                    <p style="font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Top Partners</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container reveal">
+            <div class="cta-card">
+                <h2
+                    style="font-family: var(--font-display); font-size: 3rem; margin-bottom: 2rem; position: relative; z-index: 1;">
+                    Ready to Level Up?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.8; position: relative; z-index: 1;">Join
+                    the elite circle of professionals on JobLoom.</p>
+                <button class="btn-cool">Get Started Now</button>
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+</body>
+
+</html>

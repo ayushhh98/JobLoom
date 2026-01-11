@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JobLoom - Advanced employer dashboard">
+    <title>JobLoom - Employer Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <style>
+        /* Dashboard Specific Overrides */
+        .chat-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+            height: 600px;
+        }
+
+        .chat-sidebar {
+            overflow-y: auto;
+            border-right: 1px solid var(--color-border);
+        }
+
+        .chat-main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .message-incoming {
+            background: var(--color-white);
+            border-bottom-left-radius: 0;
+            align-self: flex-start;
+        }
+
+        .message-outgoing {
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            border-bottom-right-radius: 0;
+            margin-left: auto;
+        }
+
+        .notification-dropdown {
+            width: 300px;
+            right: -100px;
+        }
+
+        @media (max-width: 768px) {
+            .chat-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-sidebar {
+                display: none;
+                /* Mobile view logic would be needed here */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-tab="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-tab="jobs">Jobs</a></li>
+                    <li><a href="#" class="nav-link" data-tab="candidates">Candidates</a></li>
+                    <li><a href="#" class="nav-link" data-tab="messages">Messages</a></li>
+                </ul>
+
+                <div class="user-identity">
+                    <!-- Notifications -->
+                    <div class="user-identityDropdown" style="margin-left: 0;">
+                        <button class="btn-icon" id="notificationTrigger" style="position: relative;">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge badge-danger"
+                                style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 0.6rem;">5</span>
+                        </button>
+                        <ul class="user-dropdown notification-dropdown" id="notificationDropdown">
+                            <li
+                                style="padding: 1rem; font-weight: 700; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+                                <span>Notifications</span>
+                                <a href="#" style="font-size: 0.8rem; color: var(--color-primary);">Mark all read</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item">
+                                    <div style="display: flex; gap: 0.8rem; align-items: start;">
+                                        <div
+                                            style="background: var(--color-primary-light); width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;">
+                                        </div>
+                                        <div>
+                                            <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">New
+                                                Application</p>
+                                            <p style="font-size: 0.75rem; color: var(--color-gray);">John Doe applied
+                                                for Frontend Dev</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item"
+                                    style="justify-content: center; color: var(--color-primary); font-weight: 600;">
+                                    Show All Notifications
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Profile -->
+                    <ul class="user-identityDropdown">
+                        <li class="user-trigger" id="userTrigger">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-building"
+                                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #fff; color: var(--color-primary);"></i>
+                            </div>
+                            <span class="user-email-nav">Tech Corp</span>
+                            <i class="fas fa-chevron-down dropdown-chevron"></i>
+                        </li>
+                        <ul class="user-dropdown" id="userDropdown">
+                            <li><a href="/profile-employer" class="dropdown-item"><i class="fas fa-user-circle"></i>
+                                    Profile</a></li>
+                            <li><a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a href="/logout" class="dropdown-item logout-link"><i class="fas fa-sign-out-alt"></i>
+                                    Logout</a></li>
+                        </ul>
+                    </ul>
+                </div>
+
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Hero Section (Visible only on Dashboard) -->
+        <section class="hero-section" id="dashboard-hero"
+            style="background: linear-gradient(135deg, var(--color-primary-light) 0%, #fff 100%); padding: 4rem 0; margin-bottom: 3rem;">
+            <div class="container">
+                <div class="hero-content" style="grid-template-columns: 1fr; text-align: left; gap: 1rem;">
+                    <div class="hero-text">
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Welcome back, <span
+                                style="color: var(--color-primary);">Tech Innovations</span></h1>
+                        <p style="font-size: 1.1rem;">Here's what's happening with your job postings today.</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn btn-primary" onclick="openModal('postJobModal')"><i class="fas fa-plus"></i>
+                            Post New Job</button>
+                        <button class="btn btn-outline" onclick="switchTab('candidates')"><i class="fas fa-users"></i>
+                            Search Candidates</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="container">
+
+            <!-- Dashboard Tab -->
+            <div id="tab-dashboard" class="tab-pane active">
+                <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                    <h2>Overview</h2>
+                </div>
+
+                <!-- Premium Stats Grid -->
+                <div class="stats-grid-professional">
+                    <div class="stat-card-premium">
+                        <div class="stat-icon-premium"
+                            style="background: var(--color-primary-light); color: var(--color-primary);">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-content-premium">
+                            <span class="stat-value-premium">12</span>
+                            <span class="stat-label-premium">Active Jobs</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-premium">
+                        <div class="stat-icon-premium"
+                            style="background: var(--color-success-light); color: var(--color-success);">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content-premium">
+                            <span class="stat-value-premium">156</span>
+                            <span class="stat-label-premium">Total Applications</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-premium">
+                        <div class="stat-icon-premium"
+                            style="background: var(--color-warning-light); color: var(--color-warning);">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div class="stat-content-premium">
+                            <span class="stat-value-premium">8</span>
+                            <span class="stat-label-premium">Interviews Scheduled</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-premium">
+                        <div class="stat-icon-premium"
+                            style="background: var(--color-info-light); color: var(--color-info);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content-premium">
+                            <span class="stat-value-premium">2.4k</span>
+                            <span class="stat-label-premium">Profile Views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity / Jobs Preview -->
+                <div class="glass-card mt-5">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h3>Recent Job Postings</h3>
+                        <button class="btn btn-outline btn-sm" onclick="switchTab('jobs')">View All</button>
+                    </div>
+
+                    <div class="table-container-premium" style="box-shadow: none; border: none;">
+                        <table class="data-table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Posted Date</th>
+                                    <th>Applications</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 600;">Senior Frontend Developer</td>
+                                    <td>Oct 24, 2024</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <i class="fas fa-users text-muted"></i> 24
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">UI/UX Designer</td>
+                                    <td>Oct 20, 2024</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <i class="fas fa-users text-muted"></i> 18
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Management Tab -->
+            <div id="tab-jobs" class="tab-pane" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="font-size: 2rem;">Manage Jobs</h2>
+                    <button class="btn btn-primary" onclick="openModal('postJobModal')"><i class="fas fa-plus"></i> Post
+                        New Job</button>
+                </div>
+
+                <div class="glass-card">
+                    <!-- Filters -->
+                    <div class="search-input-group-premium"
+                        style="margin-top: 0; margin-bottom: 2rem; background: var(--color-bg);">
+                        <i class="fas fa-search" style="color: var(--color-gray); padding: 1rem 0 1rem 1.5rem;"></i>
+                        <input type="text" class="search-input-premium" style="color: var(--color-dark);"
+                            placeholder="Search jobs by title, ID...">
+                        <select class="form-control" style="width: auto; border: none; background: transparent;">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Closed</option>
+                            <option>Draft</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container-premium">
+                        <table class="data-table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Location</th>
+                                    <th>Type</th>
+                                    <th>Salary Range</th>
+                                    <th>Applications</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div style="font-weight: 600;">Senior Frontend Developer</div>
+                                        <small class="text-muted">ID: #JOB-2024-001</small>
+                                    </td>
+                                    <td>Remote</td>
+                                    <td>Full-time</td>
+                                    <td>$120k - $160k</td>
+                                    <td><span class="badge badge-info">24 New</span></td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="View Candidates"><i
+                                                    class="fas fa-users"></i></button>
+                                            <button class="btn-icon" title="Close Job"
+                                                style="color: var(--color-danger);"><i class="fas fa-ban"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="font-weight: 600;">Backend Engineer (Node.js)</div>
+                                        <small class="text-muted">ID: #JOB-2024-002</small>
+                                    </td>
+                                    <td>New York, NY</td>
+                                    <td>Full-time</td>
+                                    <td>$130k - $170k</td>
+                                    <td><span class="badge badge-info">12 New</span></td>
+                                    <td><span class="badge badge-warning">Paused</span></td>
+                                    <td>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="View Candidates"><i
+                                                    class="fas fa-users"></i></button>
+                                            <button class="btn-icon" title="Close Job"
+                                                style="color: var(--color-danger);"><i class="fas fa-ban"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="btn btn-outline btn-sm"><i class="fas fa-chevron-left"></i></button>
+                        <button class="btn btn-primary btn-sm">1</button>
+                        <button class="btn btn-outline btn-sm">2</button>
+                        <button class="btn btn-outline btn-sm">3</button>
+                        <button class="btn btn-outline btn-sm"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidates Tab -->
+            <div id="tab-candidates" class="tab-pane" style="display: none;">
+                <h2 style="font-size: 2rem; margin-bottom: 2rem;">Candidate Pipeline</h2>
+
+                <div class="grid-dashboard" style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+                    <!-- Filters Sidebar -->
+                    <aside>
+                        <div class="glass-card" style="padding: 1.5rem;">
+                            <h4 class="mb-3">Filters</h4>
+                            <div class="form-group">
+                                <label>Job Role</label>
+                                <select class="form-control">
+                                    <option>All Jobs</option>
+                                    <option>Frontend Dev</option>
+                                    <option>Backend Dev</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="font-weight: 400;"><input type="checkbox"> New Applied</label>
+                                    <label style="font-weight: 400;"><input type="checkbox"> Interviewing</label>
+                                    <label style="font-weight: 400;"><input type="checkbox"> Shortlisted</label>
+                                    <label style="font-weight: 400;"><input type="checkbox"> Rejected</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-full">Apply Filters</button>
+                        </div>
+                    </aside>
+
+                    <!-- Candidates List -->
+                    <div class="application-list-full">
+                        <!-- Candidate 1 -->
+                        <div class="application-item-full">
+                            <div class="job-details-col">
+                                <div class="company-icon" style="border-radius: 50%; width: 50px; height: 50px;">
+                                    <img src="https://i.pravatar.cc/150?img=1" alt="Candidate"
+                                        style="width: 100%; height: 100%; border-radius: 50%;">
+                                </div>
+                                <div class="job-info">
+                                    <h5>John Smith</h5>
+                                    <p class="text-muted">Applied for: Senior Frontend Developer</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--color-gray);">Experience</div>
+                                <div style="font-weight: 600;">5 Years</div>
+                            </div>
+                            <div>
+                                <span class="status-badge status-interview">Interview</span>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-sm btn-primary">Profile</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-comment"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Candidate 2 -->
+                        <div class="application-item-full">
+                            <div class="job-details-col">
+                                <div class="company-icon" style="border-radius: 50%; width: 50px; height: 50px;">
+                                    <img src="https://i.pravatar.cc/150?img=5" alt="Candidate"
+                                        style="width: 100%; height: 100%; border-radius: 50%;">
+                                </div>
+                                <div class="job-info">
+                                    <h5>Sarah Connor</h5>
+                                    <p class="text-muted">Applied for: UI/UX Designer</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--color-gray);">Experience</div>
+                                <div style="font-weight: 600;">3 Years</div>
+                            </div>
+                            <div>
+                                <span class="status-badge status-applied">New</span>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-sm btn-primary">Profile</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-comment"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="tab-messages" class="tab-pane" style="display: none;">
+                <h2 style="font-size: 2rem; margin-bottom: 2rem;">Messages</h2>
+
+                <div class="glass-card p-0" style="padding: 0; overflow: hidden;">
+                    <div class="chat-layout">
+                        <!-- Sidebar -->
+                        <div class="chat-sidebar p-3" style="padding: 1.5rem;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search conversations...">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <!-- Contact 1 -->
+                                <div
+                                    style="display: flex; gap: 1rem; padding: 0.8rem; border-radius: var(--radius-md); background: var(--color-bg); cursor: pointer;">
+                                    <div style="position: relative;">
+                                        <img src="https://i.pravatar.cc/150?img=1"
+                                            style="width: 40px; height: 40px; border-radius: 50%;">
+                                        <div
+                                            style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; background: var(--color-success); border-radius: 50%; border: 2px solid white;">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 style="font-size: 0.95rem; margin-bottom: 0.2rem;">John Smith</h5>
+                                        <p
+                                            style="font-size: 0.8rem; color: var(--color-gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px;">
+                                            Hey, is the position still open?</p>
+                                    </div>
+                                </div>
+
+                                <!-- Contact 2 -->
+                                <div
+                                    style="display: flex; gap: 1rem; padding: 0.8rem; border-radius: var(--radius-md); cursor: pointer;">
+                                    <div style="position: relative;">
+                                        <img src="https://i.pravatar.cc/150?img=5"
+                                            style="width: 40px; height: 40px; border-radius: 50%;">
+                                        <!-- Offline/Away -->
+                                    </div>
+                                    <div>
+                                        <h5 style="font-size: 0.95rem; margin-bottom: 0.2rem;">Sarah Connor</h5>
+                                        <p style="font-size: 0.8rem; color: var(--color-gray);">Thanks for the
+                                            interview!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Main -->
+                        <div class="chat-main">
+                            <!-- Header -->
+                            <div
+                                style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <img src="https://i.pravatar.cc/150?img=1"
+                                        style="width: 40px; height: 40px; border-radius: 50%;">
+                                    <div>
+                                        <h5 style="margin-bottom: 0;">John Smith</h5>
+                                        <small class="text-success">Online</small>
+                                    </div>
+                                </div>
+                                <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+
+                            <!-- Messages Area -->
+                            <div class="chat-messages">
+                                <div style="text-align: center; margin-bottom: 1.5rem;">
+                                    <small class="text-muted">Today, 10:30 AM</small>
+                                </div>
+
+                                <div class="message-bubble message-incoming">
+                                    <p>Hello! I was wondering if you reviewed my application?</p>
+                                </div>
+
+                                <div class="message-bubble message-outgoing">
+                                    <p>Hi John! Yes, we are currently reviewing it. We will get back to you by Friday.
+                                    </p>
+                                </div>
+
+                                <div class="message-bubble message-incoming">
+                                    <p>Great, thank you! Looking forward to it.</p>
+                                </div>
+                            </div>
+
+                            <!-- Input Area -->
+                            <div
+                                style="padding: 1rem 1.5rem; background: var(--color-white); border-top: 1px solid var(--color-border);">
+                                <div style="display: flex; gap: 1rem;">
+                                    <button class="btn-icon"><i class="fas fa-paperclip"></i></button>
+                                    <input type="text" class="form-control" placeholder="Type a message..."
+                                        style="border-radius: 20px;">
+                                    <button class="btn btn-primary"
+                                        style="padding: 0.5rem 1rem; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"><i
+                                            class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Post Job Modal -->
+    <div id="postJobModal" class="modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <div class="glass-card"
+            style="width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; background: white;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 style="font-family: 'Outfit', sans-serif;">Post a New Job</h2>
+                <i class="fas fa-times" style="cursor: pointer; font-size: 1.5rem;"
+                    onclick="closeModal('postJobModal')"></i>
+            </div>
+            <form onsubmit="handleJobSubmit(event)">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title *</label>
+                    <input type="text" id="jobTitle" class="form-control" placeholder="e.g., Senior Software Engineer"
+                        required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="jobLocation">Location *</label>
+                        <input type="text" id="jobLocation" class="form-control" placeholder="e.g., Remote or City"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobSalary">Salary Range *</label>
+                        <input type="text" id="jobSalary" class="form-control" placeholder="e.g., $80K - $120K"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobDescription">Job Description *</label>
+                    <textarea id="jobDescription" class="form-control"
+                        placeholder="Describe the job responsibilities..." required
+                        style="min-height: 120px;"></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-outline w-full"
+                        onclick="closeModal('postJobModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary w-full">Post Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // DOM Elements
+        const tabs = document.querySelectorAll('[data-tab]');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        const userTrigger = document.getElementById('userTrigger');
+        const userDropdown = document.getElementById('userDropdown');
+        const notifTrigger = document.getElementById('notificationTrigger');
+        const notifDropdown = document.getElementById('notificationDropdown');
+
+        // Tab Switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = tab.getAttribute('data-tab');
+                switchTab(target);
+            });
+        });
+
+        function switchTab(tabId) {
+            // Update Nav
+            tabs.forEach(t => t.classList.remove('active'));
+            const activeTab = document.querySelector(`[data-tab="${tabId}"]`);
+            if (activeTab) activeTab.classList.add('active');
+
+            // Update Panes
+            tabPanes.forEach(pane => {
+                pane.style.display = 'none';
+                pane.classList.remove('active');
+            });
+            const targetPane = document.getElementById(`tab-${tabId}`);
+            if (targetPane) {
+                targetPane.style.display = 'block';
+                setTimeout(() => targetPane.classList.add('active'), 10);
+            }
+
+            // Hero only on dashboard
+            const hero = document.getElementById('dashboard-hero');
+            if (hero) hero.style.display = (tabId === 'dashboard') ? 'block' : 'none';
+        }
+
+        // Dropdowns
+        function toggleDropdown(trigger, dropdown) {
+            dropdown.classList.toggle('active');
+            const chevron = trigger.querySelector('.dropdown-chevron');
+            if (chevron) chevron.classList.toggle('rotate');
+        }
+
+        userTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(userTrigger, userDropdown);
+            notifDropdown.classList.remove('active'); // Close other
+        });
+
+        notifTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('active');
+            userDropdown.classList.remove('active'); // Close other
+        });
+
+        // Close dropdowns on click outside
+        document.addEventListener('click', () => {
+            userDropdown.classList.remove('active');
+            notifDropdown.classList.remove('active');
+            const chevron = userTrigger.querySelector('.dropdown-chevron');
+            if (chevron) chevron.classList.remove('rotate');
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+        }
+
+        // Dummy Form Handle
+        function handleJobSubmit(e) {
+            e.preventDefault();
+            alert('Job Posted Successfully! (Demo)');
+            closeModal('postJobModal');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('dashboard'); // Ensure correct state on load
+        });
+
+    </script>
+</body>
+
+</html>

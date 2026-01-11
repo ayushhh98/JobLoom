@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Registration | Hire</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .progress-header {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-gray);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .progress-step.active {
+            color: var(--color-dark);
+            font-weight: 600;
+        }
+
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active .step-icon {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+        }
+
+        .progress-line {
+            height: 2px;
+            background: var(--color-border);
+            width: 40px;
+            align-self: center;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--color-dark);
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-page-bg">
+        <!-- Back to Home Button -->
+        <a href="/"
+            style="position: absolute; top: 2rem; left: 2rem; display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray); font-weight: 500; z-index: 20;">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="auth-card" style="max-width: 550px;">
+            <div class="auth-header" style="margin-bottom: 1.5rem;">
+                <h2 class="auth-title">Recruiter Sign Up</h2>
+                <p class="auth-subtitle">Find the best talent for your company</p>
+            </div>
+
+            <!-- Progress Header -->
+            <div class="progress-header">
+                <div class="progress-step active" id="step1-indicator">
+                    <span class="step-icon"><i class="fas fa-check" style="display:none;"></i>1</span>
+                    Basic Details
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" id="step2-indicator">
+                    <span class="step-icon">2</span>
+                    Company Details
+                </div>
+            </div>
+
+            <form id="recruiterForm">
+                <!-- Alert Box -->
+                <div id="alertBox"
+                    style="display:none; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem; text-align: center; font-size: 0.9rem;">
+                </div>
+
+                <!-- STEP 1: Basic Details -->
+                <div class="form-section active" id="step1">
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="mobile" class="form-control form-control-icon"
+                            placeholder="Mobile Number (+91)" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label
+                            style="display:block; margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--color-gray);">You're
+                            creating account as</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="account_type" value="company" checked>
+                                Company/Business
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="account_type" value="individual">
+                                Individual/Proprietor
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="far fa-user input-icon"></i>
+                        <input type="text" id="name" class="form-control form-control-icon"
+                            placeholder="Full Name (as per PAN)" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="far fa-envelope input-icon"></i>
+                        <input type="email" id="email" class="form-control form-control-icon"
+                            placeholder="Official Email ID" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-control form-control-icon"
+                            placeholder="Create Password" required>
+                    </div>
+
+                    <button type="button" class="auth-btn" onclick="validateStep1()">Continue <i
+                            class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i></button>
+                </div>
+
+                <!-- STEP 2: Company Details -->
+                <div class="form-section" id="step2">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label
+                            style="display:block; margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--color-gray);">Hiring
+                            for</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hiring_for" value="company" checked>
+                                Your Company
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hiring_for" value="consultancy">
+                                A Consultancy
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="far fa-building input-icon"></i>
+                        <input type="text" id="companyName" class="form-control form-control-icon"
+                            placeholder="Company Name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-users input-icon"></i>
+                        <select id="employees" class="form-control form-control-icon" style="appearance: none;">
+                            <option value="">Number of Employees</option>
+                            <option value="1-10">1-10</option>
+                            <option value="11-50">11-50</option>
+                            <option value="51-200">51-200</option>
+                            <option value="200+">200+</option>
+                        </select>
+                        <i class="fas fa-chevron-down"
+                            style="position: absolute; right: 1.25rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-gray);"></i>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="far fa-id-badge input-icon"></i>
+                        <input type="text" id="designation" class="form-control form-control-icon"
+                            placeholder="Your Designation" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt input-icon"></i>
+                        <input type="text" id="pincode" class="form-control form-control-icon" placeholder="Pincode"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="far fa-map input-icon" style="top: 1.5rem;"></i>
+                        <textarea id="address" class="form-control form-control-icon" rows="2"
+                            placeholder="Company Address" style="padding-top: 1rem;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="auth-btn"
+                            style="background: white; color: var(--color-dark); border: 2px solid var(--color-border); box-shadow: none;"
+                            onclick="prevStep()">Back</button>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                <p style="color: var(--color-gray); font-size: 0.95rem;">
+                    Already have an account? <a href="/login" class="auth-link">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateStep1() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const mobile = document.getElementById('mobile').value;
+
+            if (!name || !email || !password || !mobile) {
+                alert('Please fill in all basic details');
+                return;
+            }
+
+            // Move to Step 2
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+
+            // Update Header
+            document.getElementById('step1-indicator').innerHTML = '<span class="step-icon" style="background:var(--success); border-color:var(--success); color:white;"><i class="fas fa-check"></i></span> Basic details';
+            document.getElementById('step2-indicator').classList.add('active');
+        }
+
+        function prevStep() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+
+            // Update Header
+            document.getElementById('step1-indicator').innerHTML = '<span class="step-icon"><i class="fas fa-check" style="display:none;"></i>1</span> Basic details';
+            document.getElementById('step1-indicator').classList.add('active');
+            document.getElementById('step2-indicator').classList.remove('active');
+        }
+
+        document.getElementById('recruiterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                role: 'employer',
+                mobile: document.getElementById('mobile').value,
+                companyName: document.getElementById('companyName').value,
+                companyDetails: {
+                    hiringFor: document.querySelector('input[name="hiring_for"]:checked').value,
+                    employees: document.getElementById('employees').value,
+                    designation: document.getElementById('designation').value,
+                    pincode: document.getElementById('pincode').value,
+                    address: document.getElementById('address').value
+                }
+            };
+
+            const alertBox = document.getElementById('alertBox');
+            alertBox.style.display = 'block';
+            alertBox.style.background = '#e0f2fe';
+            alertBox.style.color = '#0284c7';
+            alertBox.textContent = 'Creating your recruiter account...';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    alertBox.style.background = '#dcfce7';
+                    alertBox.style.color = '#15803d';
+                    alertBox.textContent = 'Account created successfully! Redirecting...';
+                    setTimeout(() => window.location.href = '/recruiter-success', 1500);
+                } else {
+                    alertBox.style.background = '#fee2e2';
+                    alertBox.style.color = '#ef4444';
+                    alertBox.textContent = data.error || data.message || 'Registration failed';
+                }
+            } catch (err) {
+                console.error(err);
+                alertBox.style.background = '#fee2e2';
+                alertBox.style.color = '#ef4444';
+                alertBox.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+
+</html>

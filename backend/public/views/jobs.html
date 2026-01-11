@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs | JobLoom</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/jobs" class="active">Find Jobs</a></li>
+                    <li><a href="/applications">My Applications</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <!-- <li><a href="#" id="logoutBtn" class="btn btn-outline btn-sm">Logout</a></li> -->
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        <div class="welcome-section reveal">
+            <h2>Find Your Next Opportunity</h2>
+            <p>Browse thousands of job openings tailored to your skills.</p>
+        </div>
+
+        <div class="job-search-bar reveal">
+            <div class="glass-card">
+                <form class="search-form" id="searchForm">
+                    <div class="form-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="keyword" class="form-control" placeholder="Job title or keywords">
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="location" class="form-control" placeholder="City or remote">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Jobs</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="job-listing-layout">
+            <!-- Sidebar Filters -->
+            <aside class="job-filters reveal">
+                <div class="glass-card">
+                    <h4>Filters</h4>
+                    <hr class="divider"
+                        style="margin-bottom: 1.5rem; border: none; border-top: 1px solid var(--color-border);">
+
+                    <div class="filter-group">
+                        <h5>Job Type</h5>
+                        <label><input type="checkbox" name="jobType" value="Full-time"> Full-time</label>
+                        <label><input type="checkbox" name="jobType" value="Part-time"> Part-time</label>
+                        <label><input type="checkbox" name="jobType" value="Contract"> Contract</label>
+                        <label><input type="checkbox" name="jobType" value="Internship"> Internship</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5>Experience Level</h5>
+                        <label><input type="checkbox" name="experience" value="Entry Level"> Entry Level</label>
+                        <label><input type="checkbox" name="experience" value="Mid Level"> Mid Level</label>
+                        <label><input type="checkbox" name="experience" value="Senior Level"> Senior Level</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5>Minimum Salary</h5>
+                        <input type="range" id="salaryRange" class="form-control" min="0" max="200000" step="5000"
+                            value="0" style="padding: 0; height: auto;"
+                            oninput="document.getElementById('salaryDisplay').innerText = '$' + this.value + '+'">
+                        <p id="salaryDisplay" class="range-display"
+                            style="font-size: 0.85rem; color: var(--color-gray); margin-top: 0.5rem;">$0+</p>
+                    </div>
+
+                    <button id="applyFiltersBtn" class="btn btn-outline btn-full" style="width: 100%;">Apply
+                        Filters</button>
+                </div>
+            </aside>
+
+            <!-- Job Results -->
+            <div class="job-results reveal">
+                <div class="tab-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h4 style="margin: 0;">124 Jobs Found</h4>
+                    <select class="form-control" style="width: auto; padding: 0.5rem 1rem;">
+                        <option>Sort by: Newest</option>
+                        <option>Sort by: Salary</option>
+                    </select>
+                </div>
+
+                <div class="job-list" id="jobList">
+                    <!-- Mock Job Item 1 -->
+                    <div class="glass-card job-item">
+                        <div class="job-header">
+                            <div class="company-logo">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="job-title-info">
+                                <h3>Senior Frontend Developer</h3>
+                                <p class="company-name">Google</p>
+                            </div>
+                            <button class="btn-icon"><i class="far fa-bookmark"></i></button>
+                        </div>
+                        <div class="job-details">
+                            <span class="detail-tag"><i class="fas fa-map-marker-alt"></i> Remote (US)</span>
+                            <span class="detail-tag"><i class="fas fa-clock"></i> Full-time</span>
+                            <span class="detail-tag"><i class="fas fa-money-bill-wave"></i> $120k - $160k</span>
+                        </div>
+                        <p class="job-description">We are looking for a passionate Senior Frontend Developer to lead our
+                            next-generation web applications using React and TypeScript.</p>
+                        <div class="job-footer">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                            <span class="date-posted">Posted 1 day ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Mock Job Item 2 -->
+                    <div class="glass-card job-item">
+                        <div class="job-header">
+                            <div class="company-logo">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="job-title-info">
+                                <h3>Product Manager</h3>
+                                <p class="company-name">SpaceX</p>
+                            </div>
+                            <button class="btn-icon"><i class="far fa-bookmark"></i></button>
+                        </div>
+                        <div class="job-details">
+                            <span class="detail-tag"><i class="fas fa-map-marker-alt"></i> Hawthorne, CA</span>
+                            <span class="detail-tag"><i class="fas fa-clock"></i> Full-time</span>
+                            <span class="detail-tag"><i class="fas fa-money-bill-wave"></i> Competitive</span>
+                        </div>
+                        <p class="job-description">Join the team building the future of space exploration. Requires 5+
+                            years of product management experience.</p>
+                        <div class="job-footer">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                            <span class="date-posted">Posted 3 days ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Mock Job Item 3 -->
+                    <div class="glass-card job-item">
+                        <div class="job-header">
+                            <div class="company-logo">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="job-title-info">
+                                <h3>Junior Data Analyst</h3>
+                                <p class="company-name">Data Insights Co.</p>
+                            </div>
+                            <button class="btn-icon"><i class="far fa-bookmark"></i></button>
+                        </div>
+                        <div class="job-details">
+                            <span class="detail-tag"><i class="fas fa-map-marker-alt"></i> New York, NY</span>
+                            <span class="detail-tag"><i class="fas fa-clock"></i> Internship</span>
+                            <span class="detail-tag"><i class="fas fa-money-bill-wave"></i> $25/hr</span>
+                        </div>
+                        <p class="job-description">Excellent opportunity for recent graduates to kickstart a career in
+                            data analysis and business intelligence.</p>
+                        <div class="job-footer">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                            <span class="date-posted">Posted 1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <a href="#" class="btn btn-outline" style="opacity: 0.5; pointer-events: none;"><i
+                            class="fas fa-chevron-left"></i></a>
+                    <a href="#" class="btn btn-primary">1</a>
+                    <a href="#" class="btn btn-outline">2</a>
+                    <a href="#" class="btn btn-outline">3</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/jobs.js"></script>
+</body>
+
+</html>

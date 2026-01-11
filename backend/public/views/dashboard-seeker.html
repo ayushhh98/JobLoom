@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | JobLoom</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+     <style>
+    
+        :root {
+            --color-primary: #4f46e5;
+            --color-primary-soft: #6366f1;
+            --color-primary-light: #eef2ff;
+            --color-primary-dark: #3730a3;
+            --color-secondary: #8b5cf6;
+            --color-dark: #0f172a;
+            --color-dark-muted: #1e293b;
+            --color-gray: #64748b;
+            --color-bg: #f8fafc;
+            --color-white: #ffffff;
+            --color-border: #e2e8f0;
+            --gradient-premium: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-display: 'Outfit', sans-serif;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-xl: 24px;
+            --transition-base: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-bg);
+            color: var(--color-dark-muted);
+            line-height: 1.6;
+        }
+
+        /* .container { margin: 0 auto; padding: 2rem; } */
+
+        /* Dashboard Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .welcome-text h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-dark);
+        }
+
+        .welcome-text span { color: var(--color-primary); }
+
+        /* Quick Actions Carousel */
+        .carousel-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .glass-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            border: 1px solid var(--color-border);
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-premium);
+            border-color: var(--color-primary-soft);
+        }
+
+        .carousel-icon {
+            width: 56px; height: 56px;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-dark);
+        }
+
+        .glass-card p {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-link {
+            color: var(--color-primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-base);
+        }
+
+        .btn-link:hover { gap: 0.75rem; }
+
+        /* Dashboard Grid Features */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Recent Activity */
+        .activity-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .activity-item:last-child { border-bottom: none; }
+
+        .activity-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .dot-success { background: #10b981; }
+        .dot-primary { background: var(--color-primary); }
+        .dot-warning { background: #f59e0b; }
+
+        .activity-info h5 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-info p {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        .activity-time {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: var(--color-gray-soft);
+        }
+
+        /* Sidebar Widgets */
+        .sidebar-widgets {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .widget-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .match-score {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .score-circle {
+            width: 120px; height: 120px;
+            border: 8px solid var(--color-primary-light);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            font-family: var(--font-display);
+        }
+
+        /* Upcoming Interviews */
+        .interview-item {
+            background: var(--color-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .interview-date {
+            background: var(--color-white);
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .interview-date span {
+            display: block;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        /* Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/dashboard-seeker">Dashboard</a></li>
+                    <li><a href="/applications">My Applications</a></li>
+                    <li><a href="/profile">Profile</a></li>
+
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content" style="padding-top: 100px;">
+        <!-- Welcome Section -->
+        <header class="dashboard-header reveal">
+            <div class="welcome-text">
+                <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+                <p style="color: var(--color-gray); font-size: 1.1rem;">Here's what's happening with your job search
+                    today.</p>
+            </div>
+            <div class="header-actions">
+                <button class="glass-card"
+                    style="padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; border: none; color: var(--color-primary);">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Quick Actions Carousel -->
+        <div class="carousel-container reveal"
+            style="display: flex; gap: 1.5rem; margin-bottom: 3rem; overflow-x: auto; padding-bottom: 1rem;">
+            <div class="glass-card hover-lift" style="flex: 1; min-width: 250px; padding: 2rem;">
+                <div class="carousel-icon"><i class="fas fa-user-edit"></i></div>
+                <h4>Complete Profile</h4>
+                <p>Add your skills and resume to stand out to top employers worldwide.</p>
+                <a href="/profile" class="btn-link">Update Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="glass-card hover-lift" style="flex: 1; min-width: 250px; padding: 2rem;">
+                <div class="carousel-icon"><i class="fas fa-search"></i></div>
+                <h4>Find Your Dream Job</h4>
+                <p>Browse thousands of openings curated specifically for your skillset.</p>
+                <a href="/jobs" class="btn-link">Search Jobs <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="glass-card hover-lift" style="flex: 1; min-width: 250px; padding: 2rem;">
+                <div class="carousel-icon"><i class="fas fa-chart-line"></i></div>
+                <h4>Track Applications</h4>
+                <p>Monitor your application status in real-time from applied to hired.</p>
+                <a href="/applications" class="btn-link">View Status <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="dashboard-grid">
+            <!-- Left Column: Activity -->
+            <section class="activity-section reveal">
+                <div class="section-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>Recent Activity</h3>
+                    <a href="/applications" class="btn-link" style="font-size: 0.9rem;">View All</a>
+                </div>
+
+                <div class="glass-card" style="padding: 0;">
+                    <div class="activity-item">
+                        <div class="activity-dot dot-success"></div>
+                        <div class="activity-info">
+                            <h5>Application Viewed</h5>
+                            <p>Google viewed your application for <strong>Senior UX Designer</strong>.</p>
+                        </div>
+                        <div class="activity-time">2h ago</div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-dot dot-primary"></div>
+                        <div class="activity-info">
+                            <h5>New Job Match</h5>
+                            <p>A new role at <strong>Microsoft</strong> matches 95% of your profile skills.</p>
+                        </div>
+                        <div class="activity-time">5h ago</div>
+                    </div>
+
+                    <div class="activity-item" style="border-bottom: none;">
+                        <div class="activity-dot dot-warning"></div>
+                        <div class="activity-info">
+                            <h5>Interview Scheduled</h5>
+                            <p>Your interview with <strong>Stripe</strong> has been confirmed for tomorrow.</p>
+                        </div>
+                        <div class="activity-time">1d ago</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Widgets -->
+            <aside class="sidebar-widgets">
+                <!-- Profile Strength Widget -->
+                <div class="widget-card glass-card reveal"
+                    style="padding: 2rem; text-align: center; margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1.5rem;">Profile Strength</h4>
+                    <div class="match-score">
+                        <div class="score-circle">85%</div>
+                        <p style="font-weight: 700; margin-top: 1rem; color: var(--color-dark);">Almost there!</p>
+                        <p style="font-size: 0.85rem; color: var(--color-gray);">Complete your certification to reach
+                            100%.</p>
+                    </div>
+                </div>
+
+                <!-- Upcoming Interviews Widget -->
+                <div class="widget-card glass-card reveal" style="padding: 2rem;">
+                    <h4 style="margin-bottom: 1.5rem;">Upcoming Interviews</h4>
+                    <div class="interview-item">
+                        <div class="interview-date">
+                            <span>12</span> Oct
+                        </div>
+                        <div class="interview-info">
+                            <h5>Stripe</h5>
+                            <p>Product Designer</p>
+                        </div>
+                    </div>
+                    <div class="interview-item">
+                        <div class="interview-date">
+                            <span>15</span> Oct
+                        </div>
+                        <div class="interview-info">
+                            <h5>Airbnb</h5>
+                            <p>Senior UI Engineer</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="/js/dashboard.js"></script>
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+    <script>
+        // Dashboard specific logic...
+    </script>
+</body>
+
+
+</html>

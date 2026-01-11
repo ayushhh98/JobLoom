@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings | JobLoom</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/" style="display: flex; align-items: center;">
+                        <img src="/images/logo.svg" alt="JobLoom" style="height: 40px;">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/jobs">Find Jobs</a></li>
+                    <li><a href="/applications">My Applications</a></li>
+                    <li><a href="/profile" class="active">Profile</a></li>
+                    <li><a href="#" id="logoutBtn" class="btn btn-outline btn-sm">Logout</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        <div class="welcome-section reveal">
+            <h2>Profile Settings</h2>
+            <p>Manage your personal information, resume, and preferences.</p>
+        </div>
+
+        <!-- Profile Stats Grid -->
+        <div class="stats-grid-professional reveal">
+            <div class="stat-card-premium">
+                <div class="stat-icon-premium"
+                    style="background: var(--color-success-light); color: var(--color-success);">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="stat-content-premium">
+                    <h3 class="stat-value-premium" id="statCompletion">85%</h3>
+                    <p class="stat-label-premium">Profile Completion</p>
+                </div>
+            </div>
+            <div class="stat-card-premium">
+                <div class="stat-icon-premium"
+                    style="background: var(--color-primary-light); color: var(--color-primary);">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-content-premium">
+                    <h3 class="stat-value-premium" id="statApplications">12</h3>
+                    <p class="stat-label-premium">Total Applications</p>
+                </div>
+            </div>
+            <div class="stat-card-premium">
+                <div class="stat-icon-premium" style="background: var(--color-info-light); color: var(--color-info);">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content-premium">
+                    <h3 class="stat-value-premium" id="statViews">234</h3>
+                    <p class="stat-label-premium">Profile Views</p>
+                </div>
+            </div>
+            <div class="stat-card-premium">
+                <div class="stat-icon-premium"
+                    style="background: var(--color-secondary-light); color: var(--color-secondary);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content-premium">
+                    <h3 class="stat-value-premium" id="statConnections">47</h3>
+                    <p class="stat-label-premium">Connections</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Summary Card -->
+        <div class="profile-summary-card glass-card reveal">
+            <div class="profile-summary-header">
+                <div class="profile-summary-photo-wrapper">
+                    <img id="summaryPhoto" src="https://via.placeholder.com/150" alt="Profile Photo"
+                        class="profile-summary-photo">
+                    <div class="profile-status-badge">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="profile-summary-info">
+                    <h3 class="profile-summary-name" id="summaryName">John Doe</h3>
+                    <p class="profile-summary-headline" id="summaryHeadline">Senior Frontend Developer with 5+ years of
+                        experience</p>
+                    <div class="profile-summary-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="summaryLocation">San Francisco, CA</span>
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-envelope"></i>
+                            <span id="summaryEmail">john.doe@example.com</span>
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Joined Dec 2024</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-summary-stats">
+                <div class="summary-stat-item">
+                    <div class="summary-stat-value" id="summaryStatCompletion">0%</div>
+                    <div class="summary-stat-label">Complete</div>
+                </div>
+                <div class="summary-stat-divider"></div>
+                <div class="summary-stat-item">
+                    <div class="summary-stat-value" id="summaryStatApplications">0</div>
+                    <div class="summary-stat-label">Applications</div>
+                </div>
+                <div class="summary-stat-divider"></div>
+                <div class="summary-stat-item">
+                    <div class="summary-stat-value" id="summaryStatInterviews">0</div>
+                    <div class="summary-stat-label">Interviews</div>
+                </div>
+                <div class="summary-stat-divider"></div>
+                <div class="summary-stat-item">
+                    <div class="summary-stat-value" id="summaryStatViews">234</div>
+                    <div class="summary-stat-label">Views</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modern Horizontal Tabs -->
+        <div class="settings-tabs-horizontal reveal">
+            <div class="tabs-container">
+                <button class="tab-button active" data-tab="personal">
+                    <i class="fas fa-user"></i>
+                    <span>Personal Info</span>
+                </button>
+                <button class="tab-button" data-tab="resume">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Resume</span>
+                </button>
+                <button class="tab-button" data-tab="preferences">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Preferences</span>
+                </button>
+                <button class="tab-button" data-tab="security">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Security</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Content Container -->
+        <div class="settings-content-modern reveal">
+            <!-- Personal Info Tab -->
+            <div class="tab-content active" id="personal">
+                <!-- Personal Info Section - ARIA Tabpanel -->
+                <section id="personal" role="tabpanel" aria-labelledby="tab-personal" aria-hidden="false">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-user-circle"></i> Personal Information
+                        </h4>
+                        <p class="section-description">Update your personal details and profile information</p>
+                    </div>
+
+                    <form id="profileForm" enctype="multipart/form-data">
+                        <div id="alertInfo" class="alert-info hidden" role="alert"></div>
+
+                        <!-- Profile Photo Upload -->
+                        <div class="profile-photo-upload mb-4">
+                            <div class="photo-wrapper">
+                                <img id="previewPhoto" src="https://via.placeholder.com/100" alt="Profile"
+                                    class="profile-photo">
+                                <label for="profilePhoto" class="photo-upload-label">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="profilePhoto" name="profilePhoto" class="hidden" accept="image/*"
+                                    onchange="previewImage(this)" tabindex="-1">
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Profile Photo</h5>
+                                <p class="text-muted mb-0">Upload a professional picture (Max 5MB, JPG or PNG)</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid mb-3">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="name" class="form-control" value="John Doe"
+                                    placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="email" class="form-control" value="john.doe@example.com"
+                                    placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid mb-3">
+                            <div class="form-group">
+                                <label for="contact"><i class="fas fa-phone"></i> Phone Number</label>
+                                <input type="tel" id="contact" class="form-control" value="+1 (555) 123-4567"
+                                    placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender"><i class="fas fa-venus-mars"></i> Gender</label>
+                                <select id="gender" class="form-control">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="location"><i class="fas fa-map-marker-alt"></i> Current Location</label>
+                            <input type="text" id="location" class="form-control" value="San Francisco, CA"
+                                placeholder="City, State / Country">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="headline"><i class="fas fa-briefcase"></i> Professional Headline</label>
+                            <input type="text" id="headline" class="form-control"
+                                placeholder="e.g. Senior Frontend Developer with 5+ years of experience">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Resume & Documents Tab -->
+            <div class="tab-content" id="resume">
+                <section id="resume" role="tabpanel" aria-labelledby="tab-resume" aria-hidden="true">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-file-alt"></i> Resume & Documents
+                        </h4>
+                        <p class="section-description">Manage your resume, portfolio, and professional documents</p>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="resumeFile"><i class="fas fa-cloud-upload-alt"></i> Your Resume (PDF or
+                            Word)</label>
+                        <div class="file-upload-enhanced" onclick="document.getElementById('resumeFile').click()">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h5 class="mb-1" id="fileName">Click to upload or drag and drop</h5>
+                            <p class="text-muted mb-0">Max size 10MB • Accepted formats: PDF, DOCX</p>
+                            <input type="file" id="resumeFile" name="resumeFile" class="hidden"
+                                onchange="updateFileName(this)" tabindex="-1" accept=".pdf,.docx">
+                        </div>
+
+                        <!-- Current Resume Display -->
+                        <div id="currentResume" class="current-document-card">
+                            <div class="document-info">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="document-details">
+                                    <p class="document-name">John_Doe_Resume_2025.pdf</p>
+                                    <p class="document-meta">Uploaded on Dec 10, 2025 • 2.4 MB</p>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn btn-sm btn-outline" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="skills"><i class="fas fa-code"></i> Key Skills <small class="text-muted">(Separate
+                                with commas)</small></label>
+                        <input type="text" id="skills" class="form-control"
+                            value="JavaScript, React, Node.js, AWS, SQL, Agile"
+                            placeholder="e.g. JavaScript, AWS, UI Design">
+                        <div class="skills-preview">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update Profile Documents
+                    </button>
+                </section>
+            </div>
+
+            <!-- Job Preferences Tab -->
+            <div class="tab-content" id="preferences">
+                <section id="preferences" role="tabpanel" aria-labelledby="tab-preferences" aria-hidden="true">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-sliders-h"></i> Job Preferences
+                        </h4>
+                        <p class="section-description">Set your job search preferences and requirements</p>
+                    </div>
+
+                    <div class="form-grid mb-3">
+                        <div class="form-group">
+                            <label for="prefJobTitle"><i class="fas fa-briefcase"></i> Preferred Job Title</label>
+                            <input type="text" id="prefJobTitle" class="form-control" value="Frontend Developer"
+                                placeholder="e.g. Senior Product Designer">
+                        </div>
+                        <div class="form-group">
+                            <label for="prefLocation"><i class="fas fa-map-marker-alt"></i> Preferred Location</label>
+                            <input type="text" id="prefLocation" class="form-control" value="Remote or San Francisco"
+                                placeholder="e.g. Remote, New York">
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="mb-2 d-block"><i class="fas fa-clock"></i> Employment Types</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkbox-text">Full-time</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span class="checkbox-text">Part-time</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkbox-text">Remote</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span class="checkbox-text">Contract</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="minSalary"><i class="fas fa-dollar-sign"></i> Expected Annual Salary (USD)</label>
+                        <input type="number" id="minSalary" class="form-control" value="120000"
+                            placeholder="e.g. 100000">
+                        <small class="text-muted">This helps us match you with suitable opportunities</small>
+                    </div>
+
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Preferences
+                    </button>
+                </section>
+            </div>
+
+            <!-- Security Tab -->
+            <div class="tab-content" id="security">
+                <section id="security" role="tabpanel" aria-labelledby="tab-security" aria-hidden="true">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-shield-alt"></i> Security Settings
+                        </h4>
+                        <p class="section-description">Manage your password and account security</p>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="security-section mb-5">
+                        <div class="security-section-header">
+                            <h5><i class="fas fa-key"></i> Change Password</h5>
+                            <p class="text-muted">Update your password to keep your account secure</p>
+                        </div>
+                        <form id="changePasswordForm">
+                            <div class="form-group mb-3">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" class="form-control" required
+                                    placeholder="Enter current password">
+                            </div>
+                            <div class="form-grid mb-3">
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" class="form-control" required
+                                        placeholder="Min 8 characters">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmNewPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmNewPassword" class="form-control" required
+                                        placeholder="Repeat new password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="fas fa-lock"></i> Update Password
+                            </button>
+                        </form>
+                    </div>
+
+                    <hr class="divider mb-5">
+
+                    <!-- 2FA -->
+                    <div class="security-section">
+                        <div class="security-section-header">
+                            <div>
+                                <h5><i class="fas fa-mobile-alt"></i> Two-Factor Authentication (2FA)</h5>
+                                <p class="text-muted">Add an extra layer of security to your account</p>
+                            </div>
+                            <div class="status-badge status-rejected">Disabled</div>
+                        </div>
+
+                        <div class="two-factor-card">
+                            <div class="two-factor-info">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Enable 2FA via authentication app (Authy, Google Authenticator)</span>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-plus-circle"></i> Setup 2FA
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- End Settings Content Modern -->
+    </main>
+
+    <script>
+        // Modern Horizontal Tab Switching
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    // Show corresponding content
+                    const tabId = button.getAttribute('data-tab');
+                    const targetContent = document.getElementById(tabId);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Function to update file name on resume upload
+        function updateFileName(input) {
+            const fileName = input.files[0] ? input.files[0].name : "Click to upload new resume";
+            document.getElementById('fileName').textContent = fileName;
+        }
+
+        // Function to preview image on profile photo upload
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('previewPhoto').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ARIA-compliant Tab Switching Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const navTabs = document.querySelectorAll('.settings-nav [role="tab"]');
+            const tabPanels = document.querySelectorAll('.settings-content [role="tabpanel"]');
+            const tabList = document.querySelector('.settings-nav .nav-list');
+
+            function switchTab(targetId, updateHash = true) {
+                // 1. Deactivate all tabs and panels
+                navTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.setAttribute('tabindex', '-1'); // Make inactive tabs unfocusable
+                });
+
+                tabPanels.forEach(panel => {
+                    panel.setAttribute('aria-hidden', 'true');
+                    panel.setAttribute('tabindex', '0'); // Make panel focusable for screen readers
+                });
+
+                // 2. Activate the selected tab and panel
+                const activeTab = document.querySelector(`[aria-controls="${targetId}"]`);
+                const activePanel = document.getElementById(targetId);
+
+                if (activeTab && activePanel) {
+                    activeTab.classList.add('active');
+                    activeTab.setAttribute('aria-selected', 'true');
+                    activeTab.setAttribute('tabindex', '0'); // Make active tab focusable
+                    activeTab.focus(); // Set focus to the active tab
+
+                    activePanel.setAttribute('aria-hidden', 'false');
+                    // Note: We don't focus the panel here, as per WAI-ARIA recommendation,
+                    // focus should remain on the tab itself.
+
+                    if (updateHash) {
+                        window.history.pushState(null, null, `#${targetId}`);
+                    }
+                }
+            }
+
+            // Event listener for mouse click
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = tab.getAttribute('aria-controls');
+                    switchTab(targetId);
+                });
+            });
+
+            // Event listener for keyboard navigation (Arrow keys)
+            tabList.addEventListener('keydown', (e) => {
+                const currentTab = document.activeElement;
+                if (!currentTab || currentTab.getAttribute('role') !== 'tab') return;
+
+                let nextTab;
+                const currentIndex = Array.from(navTabs).indexOf(currentTab);
+
+                switch (e.key) {
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                        nextTab = navTabs[(currentIndex + 1) % navTabs.length];
+                        break;
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        nextTab = navTabs[(currentIndex - 1 + navTabs.length) % navTabs.length];
+                        break;
+                    case 'Home':
+                        nextTab = navTabs[0];
+                        break;
+                    case 'End':
+                        nextTab = navTabs[navTabs.length - 1];
+                        break;
+                    default:
+                        return; // Do nothing for other keys
+                }
+
+                e.preventDefault();
+                if (nextTab) {
+                    const targetId = nextTab.getAttribute('aria-controls');
+                    switchTab(targetId);
+                }
+            });
+
+            // Initialize: switch to the tab specified in the URL hash, or default to the first one
+            const initialHash = window.location.hash.substring(1);
+            const initialTab = initialHash || (navTabs.length > 0 ? navTabs[0].getAttribute('aria-controls') : null);
+            if (initialTab) {
+                switchTab(initialTab, false); // Don't update hash on initial load
+            }
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', () => {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    switchTab(hash, false);
+                } else if (navTabs.length > 0) {
+                    // If hash is cleared, default to the first tab
+                    switchTab(navTabs[0].getAttribute('aria-controls'), false);
+                }
+            });
+
+            // Load Profile Data
+            async function loadProfileData() {
+                try {
+                    const res = await fetch('/api/auth/me');
+                    const data = await res.json();
+                    if (data.success) {
+                        const user = data.data;
+                        document.getElementById('name').value = user.name || '';
+                        document.getElementById('email').value = user.email || '';
+                        document.getElementById('contact').value = user.contact || '';
+                        document.getElementById('gender').value = user.gender || '';
+                        document.getElementById('location').value = user.location || '';
+                        document.getElementById('skills').value = user.skills ? user.skills.join(', ') : '';
+
+                        if (user.profilePhoto) {
+                            document.getElementById('previewPhoto').src = user.profilePhoto;
+                        }
+                        if (user.headline) {
+                            document.getElementById('headline').value = user.headline;
+                        }
+
+
+                        // Populate Summary Card
+                        const summaryName = document.getElementById('summaryName');
+                        const summaryHeadline = document.getElementById('summaryHeadline');
+                        const summaryLocation = document.getElementById('summaryLocation');
+                        const summaryEmail = document.getElementById('summaryEmail');
+                        const summaryPhoto = document.getElementById('summaryPhoto');
+
+                        if (summaryName) summaryName.textContent = user.name || 'Your Name';
+                        if (summaryHeadline) summaryHeadline.textContent = user.headline || 'Add a professional headline';
+                        if (summaryLocation) summaryLocation.textContent = user.location || 'Location';
+                        if (summaryEmail) summaryEmail.textContent = user.email || '';
+                        if (summaryPhoto && user.profilePhoto) summaryPhoto.src = user.profilePhoto;
+
+                        // Calculate Profile Completion
+                        let filledFields = 0;
+                        const totalFields = 6; // Name, Email, Contact, Headline, Location, Skills
+                        if (user.name) filledFields++;
+                        if (user.email) filledFields++;
+                        if (user.contact) filledFields++;
+                        if (user.headline) filledFields++;
+                        if (user.location) filledFields++;
+                        if (user.skills && user.skills.length > 0) filledFields++;
+
+                        const completion = Math.round((filledFields / totalFields) * 100);
+
+                        if (document.getElementById('summaryStatCompletion')) document.getElementById('summaryStatCompletion').textContent = completion + '%';
+                        if (document.getElementById('statCompletion')) document.getElementById('statCompletion').textContent = completion + '%';
+
+                        if (user.resume) {
+                            document.getElementById('fileName').textContent = user.resume.split('/').pop();
+                        }
+                    }
+
+                    // Fetch Applications for Stats
+                    try {
+                        const appRes = await fetch('/api/jobs/applied');
+                        const appData = await appRes.json();
+                        if (appData.success) {
+                            const apps = appData.data || [];
+                            const appCount = apps.length;
+                            const interviewCount = apps.filter(a => a.status === 'interview').length;
+
+                            if (document.getElementById('summaryStatApplications')) document.getElementById('summaryStatApplications').textContent = appCount;
+                            if (document.getElementById('summaryStatInterviews')) document.getElementById('summaryStatInterviews').textContent = interviewCount;
+
+                            // Also update Top Stats Grid
+                            if (document.getElementById('statApplications')) document.getElementById('statApplications').textContent = appCount;
+                        }
+                    } catch (e) {
+                        console.log("Could not load application stats");
+                    }
+
+                } catch (err) {
+                    console.error('Failed to load profile', err);
+                }
+            }
+
+            // Handle Profile Update
+            const profileForm = document.getElementById('profileForm');
+            if (profileForm) {
+                profileForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const alertInfo = document.getElementById('alertInfo');
+                    alertInfo.textContent = 'Saving changes...';
+                    alertInfo.classList.remove('hidden', 'alert-danger', 'alert-success');
+                    alertInfo.classList.add('alert-info');
+
+                    const formData = new FormData();
+                    formData.append('name', document.getElementById('name').value);
+                    formData.append('email', document.getElementById('email').value);
+                    formData.append('contact', document.getElementById('contact').value);
+                    formData.append('gender', document.getElementById('gender').value);
+                    formData.append('gender', document.getElementById('gender').value);
+                    formData.append('location', document.getElementById('location').value);
+                    formData.append('headline', document.getElementById('headline').value);
+                    formData.append('skills', document.getElementById('skills').value);
+
+                    const photoFile = document.getElementById('profilePhoto').files[0];
+                    if (photoFile) {
+                        formData.append('profilePhoto', photoFile);
+                    }
+
+                    try {
+                        const res = await fetch('/api/users/profile', {
+                            method: 'PUT',
+                            body: formData
+                        });
+                        const result = await res.json();
+
+                        if (result.success) {
+                            alertInfo.textContent = 'Profile updated successfully!';
+                            alertInfo.classList.replace('alert-info', 'alert-success');
+
+                            // Update Summary Card Immediately
+                            document.getElementById('summaryName').textContent = result.data.name;
+                            document.getElementById('summaryHeadline').textContent = result.data.headline || 'Add a professional headline';
+                            document.getElementById('summaryLocation').textContent = result.data.location || 'Location';
+                            document.getElementById('summaryEmail').textContent = result.data.email;
+                            if (result.data.profilePhoto) {
+                                document.getElementById('summaryPhoto').src = result.data.profilePhoto;
+                            }
+
+                            // Refresh nav identity if photo changed
+                            if (window.checkUserIdentity) {
+                                await window.checkUserIdentity();
+                            }
+                        } else {
+                            alertInfo.textContent = result.error || 'Update failed';
+                            alertInfo.classList.replace('alert-info', 'alert-danger');
+                        }
+                    } catch (err) {
+                        console.error('Upload error', err);
+                        alertInfo.textContent = 'Something went wrong';
+                        alertInfo.classList.replace('alert-info', 'alert-danger');
+                    }
+                });
+            }
+
+            loadProfileData();
+        });
+    </script>
+
+    <footer
+        style="background: var(--color-white); padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div class="container">
+            <div class="footer-content"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="/"><img src="/images/logo.svg" alt="JobLoom" style="height: 50px;"></a>
+                    </div>
+                    <p style="color: var(--color-gray); line-height: 1.6;">Connecting talent with opportunity. The next
+                        generation job portal for professionals and companies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="/" style="color: var(--color-gray); transition: color 0.3s;">Home</a></li>
+                        <li><a href="/jobs" style="color: var(--color-gray); transition: color 0.3s;">Find Jobs</a></li>
+                        <li><a href="/recruiter-register" style="color: var(--color-gray); transition: color 0.3s;">Post
+                                a Job</a></li>
+                        <li><a href="/certificate-management"
+                                style="color: var(--color-gray); transition: color 0.3s;">Verify Certificates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Support</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Help Center</a></li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Privacy Policy</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Terms of Service</a>
+                        </li>
+                        <li><a href="#" style="color: var(--color-gray); transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 style="margin-bottom: 1.5rem; color: var(--color-dark);">Stay Connected</h4>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--color-gray); font-size: 0.9rem;">&copy; 2025 JobLoom. All rights reserved.</p>
+                <p style="color: var(--color-gray); font-size: 0.9rem;">Designed with <i class="fas fa-heart"
+                        style="color: var(--color-danger);"></i> for professionals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+</body>
+
+</html>
